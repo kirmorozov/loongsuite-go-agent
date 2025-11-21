@@ -145,7 +145,7 @@ func createHookArgs(names []string) []dst.Expr {
 	for _, name := range names {
 		// Pass nil to trampoline func if the argument of target func is "_"
 		// Otherwise, pass the pointer of the argument
-		if name == "_" {
+		if name == ast.IdentIgnore {
 			exprs = append(exprs, ast.Nil())
 		} else {
 			exprs = append(exprs, ast.AddressOf(name))

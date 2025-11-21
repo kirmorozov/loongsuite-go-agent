@@ -50,6 +50,7 @@ const (
 	TrampolinePackageNameIdentifier  = "PackageName"
 	TrampolineReturnValsIdentifier   = "ReturnVals"
 	TrampolineSkipName               = "skip"
+	TrampolineSetSkipCallName        = "SetSkipCall"
 	TrampolineCallContextName        = "callContext"
 	TrampolineCallContextType        = "CallContext"
 	TrampolineCallContextImplType    = "CallContextImpl"

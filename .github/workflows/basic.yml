@@ -30,6 +30,9 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
+      # One flaky Go version should not cancel the others; the matrix is
+      # wide enough now that a cancelled column hides real signal.
+      fail-fast: false
       # If you want to matrix build , you can append the following list.
       matrix:
         # Go 1.24 is kept deliberately: modules declare `go 1.25.0` (required by

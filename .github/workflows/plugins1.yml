@@ -30,6 +30,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
+      # One flaky Go version should not cancel the others; the matrix is
+      # wide enough now that a cancelled column hides real signal.
+      fail-fast: false
       matrix:
         # Go 1.24 is kept deliberately: modules declare `go 1.25.0` (required by
         # OTel >= 1.42), so a 1.24 runner exercises the GOTOOLCHAIN=auto upgrade

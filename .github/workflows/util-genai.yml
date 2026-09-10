@@ -26,17 +26,14 @@ jobs:
       matrix:
         # Go 1.24 is kept deliberately: modules declare `go 1.25.0` (required by
         # OTel >= 1.42), so a 1.24 runner exercises the GOTOOLCHAIN=auto upgrade
-        # path that users on 1.24 rely on. Go 1.26 and 1.27 joined once
-        # bytedance/sonic reached v1.15.x - v1.14.1 gated GoMapIterator behind
-        # !go1.26, which broke the eino and hertz builds. sonic keeps its
-        # assembly fast paths behind !go1.28, so 1.27 exercises the same code
-        # as 1.26 and the next toolchain is the one to re-check.
+        # path that users on 1.24 rely on. Go 1.26 joins the matrix now that
+        # bytedance/sonic is on v1.15.x - v1.14.1 gated GoMapIterator behind
+        # !go1.26, which broke the eino and hertz builds.
         # See https://github.com/bytedance/sonic/issues/895
         go_version:
           - 1.24
           - 1.25
           - 1.26
-          - 1.27
     steps:
     - uses: actions/checkout@v4
 

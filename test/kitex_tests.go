@@ -24,14 +24,12 @@ func init() {
 		NewGeneralTestCase("kitex-basic-test", kitex_module_name, "", "", "1.18", "", TestKitexBasic),
 		NewGeneralTestCase("kitex-grpc-test", kitex_module_name, "", "", "1.18", "", TestKitexGrpc),
 		NewMuzzleTestCase("kitex-basic-test", kitex_dependency_name, kitex_module_name, "", "", "1.18", "", []string{"test_grpc_kitex.go", "handler.go"}),
-		// Capped at Go 1.25: kitex v0.15.1 requires sonic v1.14.1 and dynamicgo
-		// v0.7.0, and neither builds on Go 1.26 - sonic gates GoMapIterator
-		// behind !go1.26, dynamicgo links against encoding/json internals the
-		// 1.26 linker rejects. Both need an upstream kitex release to move;
-		// forcing newer transitive versions here would test a combination
-		// upstream never shipped. Lift the cap once kitex requires
-		// sonic >= v1.15.0 and dynamicgo >= v0.9.0.
-		NewLatestDepthTestCase("kitex-latestdepth-test", kitex_dependency_name, kitex_module_name, "", "v0.15.1", "1.18", "1.25", TestKitexBasic),
+		// Capped at kitex v0.16.3: the ceiling exists to keep this test on a
+		// release we have actually verified. v0.16.0 is the first that
+		// requires sonic v1.15.0 and dynamicgo v0.8.0, which is what makes
+		// it build on Go 1.26 - v0.15.x pulls sonic v1.14.1 and dynamicgo
+		// v0.7.0 and does not.
+		NewLatestDepthTestCase("kitex-latestdepth-test", kitex_dependency_name, kitex_module_name, "", "v0.16.3", "1.18", "", TestKitexBasic),
 	)
 }
 
